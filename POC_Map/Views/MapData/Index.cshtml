@@ -1,0 +1,86 @@
+﻿@model POC_Map.Models.Location
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Add Location</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0px;
+            padding: 0px;
+        }
+    </style>;
+    <script src="~/Scripts/jquery-1.10.2.js">        </script>
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4IuRFVcMjWo1qWvBrS3v4uvDXcCiq_c4&ampsensor=false">        </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btngeoclick").click(function () {
+                navigator.geolocation.getCurrentPosition(function (p) {
+                    alert(JSON.stringify(p));
+                    window.open("/Mapdata/MapView?latitude=" + p.coords.latitude + "&longitude=" + p.coords.longitude);
+                });
+            });
+        });
+        var geocoder;
+        var map;
+        var query = 'cochin';
+        function initialize() {
+            geocoder = new google.maps.Geocoder();
+            var mapOptions = {
+                zoom: 14
+            }
+            map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+            codeAddress();
+        }
+        function codeAddress() {
+            var address = query;
+            var $latitude = document.getElementById('Latitude');
+            var $longitude = document.getElementById('Longitude');
+            var infowindow = new google.maps.InfoWindow();
+            geocoder.geocode({ 'address': address }, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    map.setCenter(results[0].geometry.location);
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        position: results[0].geometry.location,
+                        title: 'Drag Me!',
+                        draggable: true
+                    });
+                    google.maps.event.addListener(marker, 'dragend', function (marker) {
+                        var latLng = marker.latLng;
+                        $latitude.value = latLng.lat();
+                        $longitude.value = latLng.lng();
+                    });
+                } else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+        }
+        google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        <div class="row">
+            <div id="map-canvas" style="width:100%;height:400px"></div>
+        </div>
+        <div>Latitude</div>
+        @Html.TextBoxFor(model => model.Latitude)
+        <div>Longitude</div>
+        @Html.TextBoxFor(model => model.Longitude)
+        <div>Address</div>
+        @Html.TextBoxFor(model => model.Address) <br />
+        <input type="submit" value="Save" />
+        <a id="btngeoclick" href="#" style="cursor:pointer">Fetch All Locations by location</a>
+    }
+</body>
+</html>

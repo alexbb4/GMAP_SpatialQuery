@@ -1,0 +1,10 @@
+D:\My Projects\POC_Map\POC_Map.Data\bin\Debug\POC_Map.Data.dll.config
+D:\My Projects\POC_Map\POC_Map.Data\bin\Debug\POC_Map.Data.dll
+D:\My Projects\POC_Map\POC_Map.Data\bin\Debug\POC_Map.Data.pdb
+D:\My Projects\POC_Map\POC_Map.Data\bin\Debug\EntityFramework.dll
+D:\My Projects\POC_Map\POC_Map.Data\bin\Debug\EntityFramework.SqlServer.dll
+D:\My Projects\POC_Map\POC_Map.Data\bin\Debug\EntityFramework.xml
+D:\My Projects\POC_Map\POC_Map.Data\bin\Debug\EntityFramework.SqlServer.xml
+D:\My Projects\POC_Map\POC_Map.Data\obj\Debug\POC_Map.Data.csprojResolveAssemblyReference.cache
+D:\My Projects\POC_Map\POC_Map.Data\obj\Debug\POC_Map.Data.dll
+D:\My Projects\POC_Map\POC_Map.Data\obj\Debug\POC_Map.Data.pdb
